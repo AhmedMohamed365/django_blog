@@ -3,10 +3,11 @@ from django.http import HttpRequest
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from .forms import UserRegisterForm
 # Create your views here.
 def register(request:HttpRequest):
     if request.method =='POST':
-       form = UserCreationForm(request.POST)
+       form = UserRegisterForm(request.POST)
        if form.is_valid():
            form.save()
            print('form is valid')
@@ -14,7 +15,7 @@ def register(request:HttpRequest):
            messages.success(request,f'account user {username} has registered!')
            return redirect('blog-home')
     else:
-        form = UserCreationForm()
+        form = UserRegisterForm()
 
     return render (request,'users/register.html',context={'form':form})
 
