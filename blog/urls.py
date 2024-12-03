@@ -5,12 +5,14 @@ PostListView,
 PostDetailView,
 PostCreateView,
 PostUpdateView,
-PostDeleteView
+PostDeleteView,
+UserPostListView
  )
 from . import views
 urlpatterns = [
     #app/model_list.html
     path('', view=PostListView.as_view(),name='blog-home'),
+    path('user/<str:username>/', view=UserPostListView.as_view(),name='user-posts'),
     path('post/new/', view=PostCreateView.as_view(),name='post-create'),
     path('post/<int:pk>/update/', view=PostUpdateView.as_view(),name='post-update'),
     path('post/<int:pk>/delete/', view=PostDeleteView.as_view(),name='post-delete'),
